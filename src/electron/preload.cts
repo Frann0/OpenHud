@@ -16,6 +16,12 @@ electron.contextBridge.exposeInMainWorld("electron", {
     ipcSend("sendFrameAction", payload);
   },
 
+  onAction: (callback) => {
+    ipcOn("action", (payload) => {
+      callback(payload);
+    });
+  },
+
   startOverlay: () => ipcSend("startOverlay", null),
   openExternalLink: (url) => ipcSend("openExternalLink", url),
   openHudsDirectory: () => ipcSend("openHudsDirectory", undefined),
@@ -34,7 +40,8 @@ function ipcOn<Key extends keyof EventPayloadMapping>(
 ) {
   electron.ipcRenderer.on(
     key as string,
-    (_: Electron.IpcRendererEvent, payload: EventPayloadMapping[Key]) => callback(payload)
+    (_: Electron.IpcRendererEvent, payload: EventPayloadMapping[Key]) =>
+      callback(payload),
   );
 }
 

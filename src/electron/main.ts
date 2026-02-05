@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import {
   checkDirectories,
   isDev,
@@ -10,6 +10,7 @@ import { createMenu } from "./menu.js";
 import { ipcMainEvents } from "./ipcEvents/index.js";
 import { closeServer, startServer } from "./index.js";
 import { closeAllWindows } from "./hudWindow.js";
+import { registerKeybinds } from "./keybinds.js";
 
 let mainWindow: BrowserWindow;
 
@@ -20,6 +21,8 @@ app.on("ready", () => {
   startServer();
   createTray();
   ipcMainEvents(mainWindow);
+
+  registerKeybinds();
 
   mainWindow.on("close", () => {
     closeAllWindows();
@@ -53,4 +56,3 @@ function createMainWindow() {
 
   return mainWindow;
 }
-

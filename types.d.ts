@@ -5,6 +5,9 @@ interface Window {
     startOverlay: () => void;
     openExternalLink: (url: string) => void;
     openHudsDirectory: () => void;
+    onAction: (
+      callback: (action: { type: string; data?: unknown }) => void,
+    ) => void;
   };
   update: {
     updateMessage: (callback: (message: string) => void) => void;
@@ -28,6 +31,10 @@ type EventPayloadMapping = {
   getPlayers: Promise<Player[]>;
   updateMessage: string;
   openHudsDirectory: void;
+  action: {
+    type: string;
+    data?: unknown;
+  };
 };
 
 type FrameWindowAction =

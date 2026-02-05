@@ -2,6 +2,7 @@ import { BrowserWindow } from "electron";
 import { getPreloadPath } from "./helpers/index.js";
 import { apiUrl } from "./index.js";
 import { createMenu } from "./menu.js";
+import { registerHudWindow, unregisterHudWindow } from "./keybinds.js";
 
 const hudWindows: BrowserWindow[] = [];
 
@@ -40,14 +41,19 @@ export function createHudWindow() {
 
   hudWindows.push(hudWindow);
 
+  registerHudWindow(hudWindow);
+
   hudWindow.on("closed", () => {
+    if (hudWindow) {
+      unregisterHudWindow(hudWindow);
+    }
     const index = hudWindows.indexOf(hudWindow as BrowserWindow);
     if (index > -1) {
       hudWindows.splice(index, 1);
     }
+
     hudWindow = null;
   });
 
   return hudWindow;
 }
-

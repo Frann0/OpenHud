@@ -15,6 +15,7 @@ export const AppFrame = () => {
     }
     setMaximized(!maximized);
   };
+
   return (
     <div
       id="AppFrame"
