@@ -21,10 +21,8 @@ export function registerKeybinds() {
 
   for (const { bind, action } of keybindDefinition) {
     const success = globalShortcut.register(bind, () => {
-      for (const win of hudWindows) {
-        console.log("[main] shortcut fired");
-        io.emit("hudAction", { type: action });
-      }
+      console.log("[main] shortcut fired");
+      io.emit("hudAction", { type: action });
     });
 
     if (!success) {
