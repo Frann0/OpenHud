@@ -28,6 +28,10 @@ export function initializeWebSocket(server: http.Server) {
       // Broadcast to all connected clients including sender
       io.emit("refreshHUD");
     });
+
+    socket.on("hudAction:test", (payload) => {
+      io.emit("hudAction", payload);
+    });
   });
 
   return io;

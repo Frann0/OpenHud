@@ -10,7 +10,7 @@ import { createMenu } from "./menu.js";
 import { ipcMainEvents } from "./ipcEvents/index.js";
 import { closeServer, startServer } from "./index.js";
 import { closeAllWindows } from "./hudWindow.js";
-import { registerKeybinds } from "./keybinds.js";
+import { registerHudWindow, registerKeybinds, unregisterHudWindow } from "./keybinds.js";
 
 let mainWindow: BrowserWindow;
 
@@ -27,6 +27,7 @@ app.on("ready", () => {
   mainWindow.on("close", () => {
     closeAllWindows();
     closeServer();
+
   });
 });
 

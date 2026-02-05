@@ -23,6 +23,7 @@
     "dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64"
   },
   "dependencies": {
+    "@types/ws": "^8.18.1",
     "cors": "^2.8.5",
     "csgogsi": "^3.0.7",
     "express": "^4.21.2",
