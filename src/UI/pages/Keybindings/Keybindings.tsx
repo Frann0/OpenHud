@@ -93,7 +93,7 @@ function normalizeBind(e: KeyboardEvent) {
 
 export default function Keybindings() {
   const [hud, setHud] = useState<HudKeybindings | null>(null);
-  const [user, setUser] = useState<UserKeybinds | null>(null);
+  const [_, setUser] = useState<UserKeybinds | null>(null);
 
   const [recordingAction, setRecordingAction] = useState<string | null>(null);
   const [draft, setDraft] = useState<Record<string, string>>({});
