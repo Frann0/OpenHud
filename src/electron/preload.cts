@@ -22,6 +22,10 @@ electron.contextBridge.exposeInMainWorld("electron", {
     });
   },
 
+  getHudKeybindings: () => ipcInvoke("getHudKeybindings"),
+  getUserKeybinds: () => ipcInvoke("getUserKeybinds"),
+  saveUserKeybinds: (payload) => ipcSend("saveUserKeybinds", payload),
+
   startOverlay: () => ipcSend("startOverlay", null),
   openExternalLink: (url) => ipcSend("openExternalLink", url),
   openHudsDirectory: () => ipcSend("openHudsDirectory", undefined),

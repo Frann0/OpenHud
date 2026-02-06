@@ -6,6 +6,7 @@ import { TeamsPage } from "./pages/Teams/TeamsPage";
 import { AppProviders } from "./context/AppProviders";
 import { Layout } from "./pages/Layout";
 import { CoachesPage } from "./pages/Coaches/CoachesPage";
+import Keybindings from "./pages/Keybindings/Keybindings";
 
 const AuthenticatedRoutes = () => (
   <AppProviders>
@@ -18,6 +19,7 @@ const AuthenticatedRoutes = () => (
           <Route path="teams" element={<TeamsPage />} />
           <Route path="coaches" element={<CoachesPage />} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="keybindings" element={<Keybindings />} />
         </Route>
       </Routes>
     </MemoryRouter>

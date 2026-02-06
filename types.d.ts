@@ -8,6 +8,10 @@ interface Window {
     onAction: (
       callback: (action: { type: string; data?: unknown }) => void,
     ) => void;
+
+    getHudKeybindings: () => Promise<any>;
+    getUserKeybinds: () => Promise<any>;
+    saveUserKeybinds: (payload: any) => void;
   };
   update: {
     updateMessage: (callback: (message: string) => void) => void;
@@ -34,6 +38,18 @@ type EventPayloadMapping = {
   action: {
     type: string;
     data?: unknown;
+  };
+  getHudKeybindings: {
+    version: number;
+    actions: { id: string; label?: string }[];
+  };
+  getUserKeybinds: {
+    version: number;
+    bindings: { action: string; bind: string }[];
+  };
+  saveUserKeybinds: {
+    version: number;
+    bindings: { action: string; bind: string }[];
   };
 };
 

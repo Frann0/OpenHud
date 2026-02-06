@@ -1,4 +1,7 @@
-import { BrowserWindow, shell } from "electron";
+import { BrowserWindow, shell, app } from "electron";
+import { saveUserKeybinds } from "../keybinds.js";
+import fs from "fs";
+import path from "path";
 import {
   ipcMainHandle,
   ipcMainOn,
@@ -11,6 +14,35 @@ export function ipcMainEvents(mainWindow: BrowserWindow) {
   ipcMainHandle("getPlayers", async () => {
     const players = await PlayersModel.selectAll();
     return players;
+  });
+
+  ipcMainHandle("getHudKeybindings", () => {
+    const file = path.join(
+      app.getPath("home"),
+      "OpenHud-Huds",
+      "build",
+      "actions.json",
+    );
+
+    if (!fs.existsSync(file)) return { version: 1, actions: [] };
+
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  });
+
+  ipcMainHandle("getUserKeybinds", () => {
+    const file = path.join(
+      app.getPath("home"),
+      "OpenHud-Huds",
+      "config",
+      "keybinds.user.json",
+    );
+
+    if (!fs.existsSync(file)) return { version: 1, bindings: [] };
+
+    return JSON.parse(fs.readFileSync(file, "utf-8"));
+  });
+  ipcMainOn("saveUserKeybinds", (payload) => {
+    saveUserKeybinds(payload);
   });
 
   ipcMainOn("sendFrameAction", (payload) => {

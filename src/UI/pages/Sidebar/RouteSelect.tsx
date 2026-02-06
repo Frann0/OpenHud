@@ -7,7 +7,8 @@ import {
   MdAddCircle,
   MdPlayArrow,
   MdSports,
-  MdRefresh
+  MdRefresh,
+  MdKeyboard,
 } from "react-icons/md";
 import { useDrawer } from "../../hooks";
 import { socket } from "../../api/socket";
@@ -26,6 +27,7 @@ const routes: RouteProps[] = [
   { Icon: MdGroups, title: "Teams", to: "teams" },
   { Icon: MdSports, title: "Coaches", to: "coaches" },
   { Icon: MdDashboard, title: "Dashboard", to: "dashboard" },
+  { Icon: MdKeyboard, title: "Key bindings", to: "keybindings" },
 ];
 
 const refreshHud = () => {
